@@ -1,0 +1,6 @@
+@startuml
+' NOTE: option + D でpreview
+!include tables.pu
+orders ||-d-o{ order_items
+items ||-d-|| order_items
+@enduml

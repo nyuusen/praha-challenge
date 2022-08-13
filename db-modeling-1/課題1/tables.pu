@@ -1,0 +1,35 @@
+@startuml
+
+
+entity orders {
+   (PK)id
+   last_name
+   first_name
+   phone
+   is_paid
+   memo
+   created_at
+   created_by
+   updated_at
+   updated_by
+}
+
+entity order_items {
+   (PK)id
+   (FK)order_id
+   (FK)item_id
+   quantity
+   is_with_wasabi
+}
+
+entity items {
+   (PK)id
+   name
+   price
+   created_at
+   created_by
+   updated_at
+   updated_by
+}
+
+@enduml
