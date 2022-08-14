@@ -1,0 +1,31 @@
+@startuml
+
+
+entity users {
+   (PK)id
+   last_name
+   first_name
+}
+
+entity channels {
+   (PK)id
+   name
+}
+
+entity users_channels {
+   (PK)user_id
+   (PK)channel_id
+}
+
+entity messages {
+   id
+   content
+   parent_message_id
+   channel_id
+   created_at
+   created_by
+   updated_at
+   updated_by
+}
+
+@enduml

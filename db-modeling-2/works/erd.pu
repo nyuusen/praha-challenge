@@ -1,0 +1,8 @@
+@startuml
+' NOTE: option + D でpreview
+!include tables.pu
+users ||-d-o{ users_channels
+channels ||-d-o{ users_channels
+users ||-d-o{ messages
+channels ||-d-o{ messages
+@enduml
