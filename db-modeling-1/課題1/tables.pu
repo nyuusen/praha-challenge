@@ -7,6 +7,7 @@ entity orders {
    first_name
    phone
    is_paid
+   is_takeout
    memo
    created_at
    created_by
@@ -26,6 +27,7 @@ entity items {
    (PK)id
    name
    price
+   category
    created_at
    created_by
    updated_at
