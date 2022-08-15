@@ -27,11 +27,16 @@ entity items {
    (PK)id
    name
    price
-   category
+   (FK)category_id
    created_at
    created_by
    updated_at
    updated_by
+}
+
+entity category {
+   (PK)id
+   name
 }
 
 @enduml

@@ -3,4 +3,5 @@
 !include tables.pu
 orders ||-d-o{ order_items
 items ||-d-|| order_items
+items ||-d-|| category
 @enduml
