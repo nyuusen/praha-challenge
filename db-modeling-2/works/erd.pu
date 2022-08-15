@@ -1,8 +1,10 @@
 @startuml
 ' NOTE: option + D でpreview
 !include tables.pu
-users ||-d-o{ users_channels
-channels ||-d-o{ users_channels
-users ||-d-o{ messages
-channels ||-d-o{ messages
+ワークスペース }o-d-o{ ワークスペース_ユーザー
+ユーザー }o-d-o{ ワークスペース_ユーザー
+ユーザー }o-d-o{ ユーザー_チャンネル
+チャンネル }o-d-o{ ユーザー_チャンネル
+ユーザー ||-d-o{ メッセージ
+チャンネル ||-d-o{ メッセージ
 @enduml

@@ -1,31 +1,38 @@
 @startuml
 
-
-entity users {
-   (PK)id
-   last_name
-   first_name
+entity ワークスペース {
+   ID
+   ワークスペース名
 }
 
-entity channels {
-   (PK)id
-   name
+entity ワークスペース_ユーザー {
+   ワークスペースID
+   ユーザーID
 }
 
-entity users_channels {
-   (PK)user_id
-   (PK)channel_id
+entity ユーザー {
+   ID
+   姓
+   名
 }
 
-entity messages {
-   id
-   content
-   parent_message_id
-   channel_id
-   created_at
-   created_by
-   updated_at
-   updated_by
+entity チャンネル {
+   ID
+   チャンネル名
+}
+
+entity ユーザー_チャンネル {
+   ユーザーID
+   チャンネルID
+}
+
+entity メッセージ {
+   ID
+   内容
+   親メッセージID
+   チャンネルID
+   ユーザーID
+   登録日時
 }
 
 @enduml
