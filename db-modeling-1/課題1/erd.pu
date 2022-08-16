@@ -2,6 +2,6 @@
 ' NOTE: option + D でpreview
 !include tables.pu
 orders ||-d-o{ order_items
-items ||-d-|| order_items
-items ||-d-|| category
+items ||-d-o{ order_items
+category ||-d-o{ items
 @enduml
