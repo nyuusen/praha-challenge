@@ -1,6 +1,5 @@
 # DBモデリング3
 ## 課題1
-![erd](works/erd.png)
 
 ```mermaid
 erDiagram
