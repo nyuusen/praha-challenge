@@ -28,6 +28,10 @@ directory {
   string id
   string name
   boolean is_deleted
+  string create_user_id
+  timestamp create_at
+  string update_user_id
+  timestamp update_at
 }
 
 directory_path {
