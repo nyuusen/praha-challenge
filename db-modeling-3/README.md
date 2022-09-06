@@ -74,6 +74,7 @@ flagもしくはtypeのようなカラムを設け、documentやdirectoryを判�
 erDiagram
 user ||--o{ object: ""
 object ||--o| document: ""
+document ||--o| document_detail: ""
 object ||--o| directory: ""
 object }o--o{ object_path: ""
 
@@ -84,8 +85,6 @@ user {
 
 object {
   string id
-  string document_id
-  string directory_id
   boolean is_root
   boolean is_deleted
   string create_user_id
@@ -96,12 +95,20 @@ object {
 
 document {
   string id
+  string object_id
+}
+
+document_detail {
+  string document_id
   string title
   string content
+  string create_user_id
+  timestamp create_at
 }
 
 directory {
   string id
+  string object_id
   string name
 }
 
