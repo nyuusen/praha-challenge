@@ -7,11 +7,12 @@ user ||--o{ reminder: ""
 reminder ||--o{ reminder_to: ""
 reminder ||--o{ reminder_cycle: ""
 reminder ||--o{ reminder_history: ""
-user }o--o{ reminder_to: ""
+reminder_to ||--o{ reminder_history: ""
+user ||--o{ reminder_to: ""
 
 user {
   string id
-  string name
+  string slack_user_id
 }
 
 reminder {
@@ -42,7 +43,6 @@ reminder_history {
   string id
   string reminder_id
   string reminder_to_id
-  integer status
   timestamp create_at
 }
 ```
@@ -57,7 +57,7 @@ reminder_history {
 - 頻度(`reminder_cycle`)テーブル
   - `type`で毎週/毎日/毎月/x日おきを管理する
   - `value`でx曜日/x日を管理する
-  - 別テーブルにしている理由: 将来的に頻度:カスタムが採用された場合、複数の頻度を組み合わせた頻度に対応できるようにするため
+  - 別テーブルにしている理由: 将来的に頻度:カスタムが追加された場合、複数の頻度を組み合わせた頻度に対応できるようにするため
   - 終了日や繰り返しx回などの機能拡張時もこのテーブルにカラムが増えるイメージ
 
 - バッチ実行時のイメージ
