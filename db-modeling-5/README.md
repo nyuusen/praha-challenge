@@ -5,6 +5,7 @@
 ```mermaid
 erDiagram
 article ||--o{ article_revision: ""
+user ||--o{ article: ""
 user ||--o{ article_revision: ""
 
 user {
@@ -14,6 +15,9 @@ user {
 
 article {
   uuid id
+  integer status
+  uuid create_user_id
+  timestamp create_at
 }
 
 article_revision {
@@ -34,6 +38,7 @@ article_revision {
   - 記事を管理する
   - 現状idしかカラムがないが、記事の状態なども持つことも考えられる
   - esaのように作成者という概念があり、マイフォルダ的な使い方をするなら、作成者カラムを設ける
+    - 必要だなと感じたため、それぞれ状態（公開/非公開など）と作成者、作成日時カラムを設けました。
 - 記事リビジョン(`article_revision`)テーブル
   - 各記事毎に履歴（その時点でのタイトルや内容）を管理する
   - 記事を更新する度にINSERTされる
