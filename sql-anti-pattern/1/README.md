@@ -33,8 +33,8 @@ tag {
 }
 
 post_tag {
-  uuid post
-  uuid tag
+  uuid post_id
+  uuid tag_id
 }
 
 ```
