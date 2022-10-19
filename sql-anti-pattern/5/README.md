@@ -66,7 +66,7 @@ contract {
   uuid customer_id
   integer type
   text memo
-  timestamp contract_at
+  timestamp action_at
   timestamp create_at
   uuid create_user_id
 }
