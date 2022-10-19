@@ -13,7 +13,7 @@
 - 設計概要
   - 顧客情報は`customer`テーブルに保存する
     - 顧客名や住所などの顧客Entityの情報を持つ
-  - 社員情報は`user`テーブルに保存する
+  - 社員情報は`staff`テーブルに保存する
   - 電話や商談した情報は`contact`テーブルに保存する
     - `type`により電話/商談を区別する
     - 電話も商談も「顧客との接点」という意味では同じものと捉えた
@@ -22,6 +22,7 @@
     - 契約情報は、顧客や接点という情報とはまた属性が異なるものだと思うので別テーブルに切り出した
     - `type`により契約/休会/解約を区別する
     - 契約や解約する度にinsertをする
+  - 商談や契約には、複数担当者がいることが多いので、`staff_contact`と`staff_contract`という中間テーブルを設けた
 
 - メリット/デメリット
   - メリット
@@ -38,16 +39,18 @@ erDiagram
 
 customer ||--o{ contact: ""
 customer ||--o{ contract: ""
-user ||--o{ contact: ""
-user ||--o{ contract: ""
+staff }o--o{ staff_contact: ""
+staff }o--o{ staff_contract: ""
+contact }o--o{ staff_contact: ""
+contract }o--o{ staff_contract: ""
 
 customer {
   uuid customer_id
   varchar name
 }
 
-user {
-  uuid user_id
+staff {
+  uuid staff_id
   varchar name
 }
 
@@ -58,7 +61,12 @@ contact {
   text memo
   timestamp contact_at
   timestamp create_at
-  uuid create_user_id
+  uuid create_staff_id
+}
+
+staff_contact {
+  uuid contact_id
+  uuid staff_id
 }
 
 contract {
@@ -68,7 +76,12 @@ contract {
   text memo
   timestamp action_at
   timestamp create_at
-  uuid create_user_id
+  uuid create_staff_id
+}
+
+staff_contract {
+  uuid contract_id
+  uuid staff_id
 }
 
 ```
