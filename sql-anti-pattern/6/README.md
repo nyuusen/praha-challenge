@@ -24,6 +24,7 @@ student {
 status {
   uuid status_id
   varchar name
+  boolean is_active
 }
 
 ```
