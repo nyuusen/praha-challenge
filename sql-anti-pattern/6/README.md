@@ -13,7 +13,7 @@
 ```mermaid
 erDiagram
 
-student ||--o{ status: ""
+student ||--|| status: ""
 
 student {
   uuid student_id
