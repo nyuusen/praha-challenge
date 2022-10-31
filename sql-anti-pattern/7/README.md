@@ -54,6 +54,7 @@ student  ||--o{ student_withdrawal: ""
 student {
   uuid student_id
   varchar name
+  integer status
 }
 
 student_withdrawal {
