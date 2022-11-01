@@ -50,11 +50,17 @@ student {
 erDiagram
 
 student  ||--o{ student_withdrawal: ""
+student  ||--|| status: ""
 
 student {
   uuid student_id
   varchar name
   integer status
+}
+
+status {
+  uuid status_id
+  varchar name
 }
 
 student_withdrawal {
@@ -85,4 +91,4 @@ student_withdrawal {
   - 再入会した場合は、全て新規ユーザーとして扱う事になる
     - 誤操作で退会した場合など、記録してきた進捗が見えなくなる
   - 退会済みユーザーを含めた分析等ができない
-- 過去に物理削除を採用したケースがない。。
+- 過去に物理削除を採用したケースがない。
