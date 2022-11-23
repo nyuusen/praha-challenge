@@ -38,11 +38,14 @@ order_payment {
 order_menu {
     uuid order_id
     uuid menu_id
+    integer quantity
+    boolean is_with_wasabi
 }
 
 menu {
   uuid menu_id
   varchar name
+  varchar price
   uuid category_id
 }
 
@@ -50,8 +53,6 @@ menu_item {
   uuid menu_item_id
   uuid menu_id
   varchar name
-  integer quantity
-  boolean is_with_wasabi
 }
 
 category {
