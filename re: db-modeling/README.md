@@ -186,11 +186,13 @@ reminder_target {
 ## 課題5（編集履歴を保存できるブログサービス）
 - 元の回答: https://github.com/nyuusen/praha-challenge/tree/main/db-modeling/db-modeling-5
 - DBモデリング3と同じ理由で最新記事テーブルを追加
+- 記事の下書き、公開、削除などのステータスはstatusテーブルを設け、外部キー制約を用いる
 
 ```mermaid
 erDiagram
 article ||--o{ article_revision: ""
 user ||--o{ article: ""
+article_status ||--o{ article: ""
 user ||--o{ article_revision: ""
 article ||--|| article_latest: ""
 article_revision ||--|| article_latest: ""
@@ -200,9 +202,14 @@ user {
   varchar name
 }
 
+article_status {
+  uuid status_id
+  varchar name
+}
+
 article {
   uuid article_id
-  integer status
+  uuid status_id
   uuid create_user_id
   timestamp create_at
 }
