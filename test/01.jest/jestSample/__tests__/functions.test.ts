@@ -34,7 +34,9 @@ describe('課題2', () => {
       jest.restoreAllMocks();
     })
     describe('saveが正常に処理される', () => {
-      jest.spyOn(mockedDb, 'save').mockImplementation(() => {});
+      beforeEach(() => {
+        jest.spyOn(mockedDb, 'save').mockImplementation(() => {});
+      })
       it('[1]を渡すと1が返却される', async() => {
         expect(func.asyncSumOfArraySometimesZero([1], mockedDb)).resolves.toBe(1)
       })
@@ -46,8 +48,10 @@ describe('課題2', () => {
       })
     })
     describe('saveが例外をthrowする', () => {
-      jest.spyOn(mockedDb, 'save').mockImplementation(() => {throw new Error();});
-      it.only('[1]を渡すと0が返却される', async() => {
+      beforeEach(() => {
+        jest.spyOn(mockedDb, 'save').mockImplementation(() => {throw new Error();});
+      })
+      it('[1]を渡すと0が返却される', async() => {
         expect(func.asyncSumOfArraySometimesZero([1], mockedDb)).resolves.toBe(0)
       })
       it('[1,2,3]を渡すと0が返却される', async() => {
@@ -60,12 +64,13 @@ describe('課題2', () => {
   })
   describe('getFirstNameThrowIfLong',() => {
     const nameApiServiceMock = new NameApiService();
-    const errorMessage = 'first_name too long';
     beforeEach(() => {
       jest.restoreAllMocks();
     })
     describe('getFirstNameがtaro(4字)を返す', () => {
-      jest.spyOn(nameApiServiceMock, 'getFirstName').mockImplementation(() => Promise.resolve('taro'));
+      beforeEach(() => {
+        jest.spyOn(nameApiServiceMock, 'getFirstName').mockImplementation(() => Promise.resolve('taro'));
+      })
       it('最大値5字を渡すとtaroが返却される', () => {
         expect(func.getFirstNameThrowIfLong(5, nameApiServiceMock)).resolves.toBe('taro');
       })
@@ -78,7 +83,9 @@ describe('課題2', () => {
     })
     describe('getFirstNameが例外をthrowする', () => {
       const errorMessage = 'firstName is too long!'
-      jest.spyOn(nameApiServiceMock, 'getFirstName').mockImplementation(() => { throw new Error(errorMessage); });
+      beforeEach(() => {
+        jest.spyOn(nameApiServiceMock, 'getFirstName').mockImplementation(() => { throw new Error(errorMessage); });
+      })
       it('最大値5字を渡すと例外が返却される', () => {
         expect(func.getFirstNameThrowIfLong(5, nameApiServiceMock)).rejects.toThrow(errorMessage);
       })
