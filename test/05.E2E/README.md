@@ -74,7 +74,12 @@ const a = cy.get('a')
 a.first().click()
 ```
 
+クイズの答え
+1. [ref](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test#Step-1-Visit-a-page)
+2. cypress.config.tsにbaseUrlを追加する [ref](https://docs.cypress.io/guides/references/configuration#Intelligent-Code-Completion)
+3. [ref](https://docs.cypress.io/guides/references/best-practices#Assigning-Return-Values)
+
 ## 参考にした記事
-[公式doc](https://www.cypress.io/)
-[【入門】はじめての Cypress](https://qiita.com/eyuta/items/a2454719c2d82c8bacd5)
-[E2EテストフレームワークのCypressに入門した](https://zenn.dev/manalink_dev/articles/manalink-cypress-introduce)
+- [公式doc](https://www.cypress.io/)
+- [【入門】はじめての Cypress](https://qiita.com/eyuta/items/a2454719c2d82c8bacd5)
+- [E2EテストフレームワークのCypressに入門した](https://zenn.dev/manalink_dev/articles/manalink-cypress-introduce)
