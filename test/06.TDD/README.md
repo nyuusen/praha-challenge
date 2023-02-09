@@ -41,3 +41,6 @@
   1. TDDは直感的に分かりづらい（→テンプレートを与えることでハードルを下げる）
   2. 「テストとはそもそも何か？」「どこから何をテストすれば良いか？」「何をテストしないか？」という悩みが生じた（→「Behavior」という表現の方が理解しやすく、悩みが減った）
 
+## 課題2 実装
+- [ref](https://github.com/nyuusen/react-storybook-testing/commit/eafb4f9fd6114c5e1833e2560f1ee6e3a78addae)
+
