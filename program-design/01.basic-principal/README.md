@@ -11,6 +11,9 @@
 - 単純にファイルを細かなファイルに分解することとの違いは？
   - 「責務」という観点を持っているか/責務は1つかどうかが異なる。細かくファイルを分割をしても、クラスや関数が2つ以上の責務を負っている可能性がある。
 
+- トリオセッションmemo
+  - 責務が1つかどうか？の判断軸＝**その関数やクラスの変更理由が1つであるか？**
+
 ### O … Open-Closed Principle: 開放閉鎖の原則
 ソフトウェアを構成するモジュールは、拡張に対して開いていて（Open）、修正に対して閉じている（Closed）べきであるという原則。
 つまり、既存機能の修正時は既存コードを変更をせずに修正できること、新機能の追加時は新しいモジュールを追加するだけで実装できる設計ルール。
@@ -55,6 +58,22 @@
 ### [このコード](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgAoFcoIBZwM4oDeAUMsugVAJIAmAXMnmFKAOanIAOUA9jegjC0GTFiHZlmcEHkRhgPEAxJkyeAUgg0tDZuggcyCHgFtOAGwiQaAQTAMAInEgcAvsXfFQkWIhSo4AE8TCHAAJQhjKBoIzh5kFWRWKwwsXAI8ACFAhgAKCmhhRmY2AEpkAF4APjRMHHwIAG0AXQ9iYgRzfDxatIaAZWgAN2AkBI5OdAAjc1HkYxk9QR4oXO5gIecUTiCQ8MiVmIg4hgDg0LAIqKO48sJPMkmZucm+gnzKItE2ABouXn4gi+JXEd0M80UTGQcHM5lS9QylWQYGwwDwADodud9tdYjx0ckwPD0hAsoEPoUaKVwQsoTsmMSGkiYXC6iSMTBQDRcmtytUuJiAQIhDRKhUKv8+MLaMgAGSygVSGRyBQgdHqBCabRU8HAGDINb4Ilshpg1SqFG8ADuyBAEBtAFEoLxVgByQDKDIA7BkAYqqAQZVAPYMgCkGQBODIALBkAUQyAVQZAH4MgAA5X2ABTTAFnagHMGQCaDIBAf9d1PND1UAHp88hAD8xgFNFQDSRoAs30AsgyAawZAEwJgACGNweIA)に潜んでいる問題点
 - 「購入する」というサービスに購入という責務以外のロジックが混入しているため、このロジックに変更が入る度に肥大していく
 - 修正方針：商品が購入できるかどうかのロジックは別のメソッドとして切り出すことによって、購入サービスは「商品を購入する」という1つの業務に集中できる。購入に関するロジック変更の影響を受けない。
+
+- トリオセッションを受けて追記
+  - このコードの問題点はアプリケーションで重い処理を行なっていること
+    - 例えば、ユーザーが大規模テナントの場合、毎処理で何万ものレコードが取得される
+    - インフラ的なコストが高く、メモリも食いそうなのでパフォーマンスも懸念される
+  - では、、SQLレベルで購入歴のある商品を取得すれば良いか？
+    - 性能やコスト面でメリットがありそう
+    - ロジックが複雑になった時に、膨大なSQLが出来上がる
+  - 元々のアプリケーション側で実装するのはどうか？
+    - 上で述べたようにコストやパフォーマンス面で懸念がある
+    - ただ、要件変更に対する拡張性や保守性はSQL高そうではある
+  - どちらが良いか？
+    - 要件が簡単だったり変更可能性が低い場合：SQLレベルで実装する
+      - 取得するデータ量があまりに多い場合も、SQLで実装した方が良いかもしれない
+    - 要件が難しい（SQLでの実装が難しい・膨大になりそう）とか変更可能性が高い場合：アプリケーションレベルで実装する
+
 
 ## 課題3
 ### [このコード](https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKCmAnCB7AdtA3gWAFDQOgAcBXAIxAEtho0wBbeALmggBdFK0BzPQ48lRrswiAOopEAay7cAgmxYARMG3h9CwdO0QlgbSQAo6jFjtkAaVm1FsJ02QuWr4ASiwb+BNgAtKEADoTeGgAXloGdXwvbz9AkXFJGR4FMOtbe2T5Nk9oAF88Atw8UEgYAGEUeiIwNABPD2iCUgpqYngUIhBmOCRUNABtAF1crTQdPQNEQyIOrp6EZHRh9xwmr19-ANnO7rSd+dyiopLtNmgtatqG8LR4AHdoSqv6wwG7x8X+wwByMB+rB9oCo1L8AEwABjBAEYALQQuEIn6uVyAh69JZoX5kAG0dEg+DgqGIuHQ5GuIauU7jc4AM0oyDYX3QaUuNXq2zm3QGEJGxVwAHoBdBAKrygEiGQDSDIA7BkAtwyADoZAMMMgHqGQDWDIB-eUAFK6ATQZANEMgH0GQCBDIBABmZGDkUsAJ0qATaVANGpgGnNQCnpoAkhkAa8qAKIZAF+KWup7GgABMXGl6YzTQEEplHDl+ULoIBVBkAfgyANQZ44ArBnlysA5gyawDqDIAzBkAIgw6lMSjOAEqjAMYMucAL2aABtM89n44AxBjwAbUYfgbAAYiQQCAAJrwUSGaEQ0dU3DB9ih4JpH70FB+yj0+B+iKMH54H0oboBEAobiGNnXdwxo-1KWAWjkVYBqFXjgBiGAt603Qc3W+0OwAyDIBITUA8QyVhuNoAgP94EAA)に潜んでいる問題点
